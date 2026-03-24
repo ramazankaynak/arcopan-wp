@@ -1,0 +1,127 @@
+:root {
+	--c-primary: #0d6e6e;
+	--c-primary-700: #0a5a5a;
+	--c-secondary: #1f2937;
+	--c-accent: #f59e0b;
+	--c-bg: #ffffff;
+	--c-surface: #f8fafc;
+	--c-text: #111827;
+	--c-text-muted: #6b7280;
+	--c-border: #e5e7eb;
+	--c-success: #15803d;
+	--c-danger: #b91c1c;
+
+	--ff-base: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+	--ff-heading: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+
+	--fs-100: 0.875rem;
+	--fs-200: 1rem;
+	--fs-300: 1.125rem;
+	--fs-400: 1.25rem;
+	--fs-500: 1.5rem;
+	--fs-600: 2rem;
+	--fs-700: 2.5rem;
+
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 3rem;
+
+	--radius-sm: 0.25rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 0.75rem;
+
+	--shadow-sm: 0 1px 2px rgb(17 24 39 / 0.08);
+	--shadow-md: 0 8px 24px rgb(17 24 39 / 0.12);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: var(--ff-base);
+	font-size: var(--fs-200);
+	line-height: 1.6;
+	color: var(--c-text);
+	background-color: var(--c-bg);
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: var(--c-primary);
+	text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+	color: var(--c-primary-700);
+	text-decoration: underline;
+}
+
+:focus-visible {
+	outline: 2px solid var(--c-primary);
+	outline-offset: 2px;
+}
+
+.arc-container {
+	width: min(1200px, 100% - 2rem);
+	margin-inline: auto;
+}
+
+.arc-section {
+	padding-block: clamp(2rem, 4vw, 4rem);
+}
+
+.arc-card {
+	background: var(--c-surface);
+	border: 1px solid var(--c-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-5);
+}
+
+.arc-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	min-height: 44px;
+	padding: 0.625rem 1rem;
+	border-radius: var(--radius-sm);
+	border: 1px solid transparent;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.arc-btn--primary {
+	color: #fff;
+	background: var(--c-primary);
+}
+
+.arc-btn--primary:hover,
+.arc-btn--primary:focus-visible {
+	background: var(--c-primary-700);
+	text-decoration: none;
+}
