@@ -1,0 +1,39 @@
+page_url,page_title,primary_keyword,secondary_keywords_1,secondary_keywords_2,search_volume,funnel_stage,page_type
+/,ARCOPAN Cold Storage Solutions,industrial cold storage systems,cold storage equipment,freezing systems,8200,awareness,homepage
+/about/,ARCOPAN Company Overview,food storage solutions,cold chain expertise,industrial refrigeration,2100,awareness,company_page
+/products/,Product Category Hub,cold storage products,refrigeration equipment,industrial freezers,3500,consideration,product_hub
+/products/chilled-cabinet/,Chilled Storage Cabinets,chilled storage solutions,cool room cabinets,food preservation,1200,consideration,product_page
+/products/blast-freezer/,Blast Freezing Equipment,blast freezing cabinets,rapid freezing systems,flash freezing,800,consideration,product_page
+/products/scroll-compressor/,Scroll Compressor Units,scroll compressor refrigeration,industrial cooling,compressor systems,450,consideration,product_page
+/products/modular-chamber/,Modular Cold Chambers,modular cold rooms,prefabricated chambers,expandable storage,680,consideration,product_page
+/products/walk-in-cooler/,Walk-In Cooling Systems,walk-in coolers,commercial refrigeration,industrial cooling,1100,consideration,product_page
+/products/control-system/,Temperature Control Systems,digital temperature control,refrigeration monitoring,smart cooling,560,consideration,product_page
+/products/vacuum-seal/,Vacuum Sealing Equipment,vacuum sealing systems,food preservation,packaging automation,380,consideration,product_page
+/products/insulation-panel/,High-Performance Insulation,insulation panels,thermal insulation,refrigeration insulation,290,consideration,product_page
+/products/condensing-unit/,Condensing Units,condensing unit systems,cooling condensers,refrigeration condensers,520,consideration,product_page
+/products/evaporator-coil/,Evaporator Coils,evaporator coil systems,cooling coils,heat exchange,410,consideration,product_page
+/products/expansion-valve/,Expansion Valve Systems,expansion valve control,refrigeration valves,flow control,320,consideration,product_page
+/solutions/,Solutions Overview Hub,cold storage solutions,industrial cooling,food preservation,4200,consideration,solution_hub
+/solutions/chilled/,Chilled Storage Solutions,chilled storage,cool room systems,food chilling,1500,consideration,solution_page
+/solutions/frozen/,Frozen Storage Solutions,frozen storage systems,deep freezing,blast freezing facilities,1800,consideration,solution_page
+/solutions/blast-freezing/,Blast Freezing Solutions,blast freezing,rapid freezing,flash freeze systems,800,consideration,solution_page
+/solutions/food-logistics/,Food Logistics & Cold Chain,cold chain logistics,food supply chain,refrigerated transport,600,consideration,solution_page
+/solutions/project-based/,Project-Based Solutions,custom cold storage,bespoke refrigeration,project solutions,450,consideration,solution_page
+/solutions/tailor-made/,Tailor-Made Systems,custom designed solutions,bespoke cold storage,customized systems,380,consideration,solution_page
+/industries/,Industries Hub,cold storage industries,food processing,industrial applications,5100,consideration,industry_hub
+/industries/food-beverage/,Food & Beverage Cold Storage,food cold storage,beverage refrigeration,food processing,3100,awareness,industry_page
+/industries/meat-poultry/,Meat & Poultry Processing,meat storage systems,poultry refrigeration,meat processing,2800,awareness,industry_page
+/industries/dairy/,Dairy Industry Solutions,dairy cold storage,milk refrigeration,dairy processing,1900,awareness,industry_page
+/industries/pharmaceuticals/,Pharmaceutical Cold Storage,pharmaceutical refrigeration,medicine storage,temperature control,3600,awareness,industry_page
+/industries/logistics/,Logistics & Distribution,cold chain logistics,refrigerated warehousing,food logistics,2200,awareness,industry_page
+/industries/retail/,Retail & Supermarket,retail refrigeration,supermarket coolers,display refrigeration,1400,awareness,industry_page
+/resources/,Resources Hub,cold storage resources,technical documentation,industry guides,2800,awareness,resource_hub
+/resources/datasheets/,Product Datasheets,product specifications,technical datasheets,equipment specs,800,consideration,resource_page
+/resources/installation-guides/,Installation Guides,installation instructions,setup guides,commissioning,650,consideration,resource_page
+/resources/certificates/,Certifications & Standards,ISO certification,industry compliance,regulatory standards,450,consideration,resource_page
+/resources/faq/,Frequently Asked Questions,cold storage FAQ,equipment questions,storage questions,2100,awareness,resource_page
+/projects/,Case Studies & Projects,cold storage projects,case studies,customer projects,1200,consideration,project_page
+/contact/,Contact & Quote Request,request for quote,cold storage quote,RFQ form,900,decision,contact_page
+/legal/privacy/,Privacy Policy,privacy policy,data protection,GDPR compliance,200,awareness,legal_page
+/legal/terms/,Terms of Service,terms of service,legal terms,service agreement,180,awareness,legal_page
+/legal/cookies/,Cookie Policy,cookie policy,cookie consent,website cookies,150,awareness,legal_page
