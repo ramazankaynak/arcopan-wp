@@ -89,6 +89,7 @@ add_filter( 'script_loader_tag', 'arcopan_main_script_as_module', 12, 2 );
  */
 function arcopan_load_includes() {
 	$includes = array(
+		'inc/taxonomies.php',
 		'inc/cpt.php',
 		'inc/performance.php',
 		'inc/acf-fields.php',
