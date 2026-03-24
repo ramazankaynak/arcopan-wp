@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{product_name}}",
+  "url": "{{product_url}}",
+  "description": "{{product_description}}",
+  "image": "{{product_image}}",
+  "sku": "{{product_sku}}",
+  "brand": {
+    "@type": "Brand",
+    "name": "ARCOPAN"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "METKON CELIK YAPI VE LOJISTIK AS"
+  },
+  "certification": "{{certifications}}",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "ARCOPAN"
+    }
+  }
+}

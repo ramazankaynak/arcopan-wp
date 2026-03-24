@@ -1,0 +1,17 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ARCOPAN",
+  "legalName": "METKON CELIK YAPI VE LOJISTIK AS",
+  "url": "https://arcopan.com",
+  "logo": "https://arcopan.com/wp-content/themes/arcopan-child/assets/images/arcopan-logo.svg",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "email": "sales@arcopan.com",
+    "availableLanguage": ["English", "Turkish", "French", "German", "Russian"]
+  },
+  "areaServed": "EMEA",
+  "knowsAbout": ["Cold Storage Engineering", "Industrial Refrigeration", "Insulated Panels", "Cold Chain Logistics", "EPC Cold Store Projects"],
+  "sameAs": ["https://linkedin.com/company/arcopan"]
+}
