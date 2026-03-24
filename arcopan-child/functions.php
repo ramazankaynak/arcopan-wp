@@ -55,7 +55,10 @@ add_action( 'wp_enqueue_scripts', 'arcopan_enqueue_assets', 20 );
 function arcopan_load_includes() {
 	$includes = array(
 		'inc/cpt.php',
+		'inc/performance.php',
 		'inc/acf-fields.php',
+		'inc/seo.php',
+		'inc/forms.php',
 	);
 
 	foreach ( $includes as $include_file ) {
