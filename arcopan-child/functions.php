@@ -44,8 +44,43 @@ function arcopan_enqueue_assets() {
 		array(),
 		$global_css_ver
 	);
+
+	$main_js_path = ARCOPAN_CHILD_PATH . 'assets/js/main.js';
+	$main_js_ver  = file_exists( $main_js_path ) ? (string) filemtime( $main_js_path ) : ARCOPAN_CHILD_VERSION;
+
+	wp_enqueue_script(
+		'arcopan-main',
+		ARCOPAN_CHILD_URI . 'assets/js/main.js',
+		array(),
+		$main_js_ver,
+		true
+	);
+
+	wp_localize_script(
+		'arcopan-main',
+		'arcopanTheme',
+		array(
+			'restUrl'    => esc_url_raw( rest_url( 'wp/v2/' ) ),
+			'restNonce'  => wp_create_nonce( 'wp_rest' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'arcopan_enqueue_assets', 20 );
+
+/**
+ * Load main.js as an ES module.
+ *
+ * @param string $tag    Script tag HTML.
+ * @param string $handle Script handle.
+ * @return string
+ */
+function arcopan_main_script_as_module( $tag, $handle ) {
+	if ( 'arcopan-main' !== $handle || false !== strpos( $tag, 'type=' ) ) {
+		return $tag;
+	}
+	return str_replace( '<script ', '<script type="module" ', $tag );
+}
+add_filter( 'script_loader_tag', 'arcopan_main_script_as_module', 12, 2 );
 
 /**
  * Load child includes.

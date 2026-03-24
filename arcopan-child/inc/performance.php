@@ -80,6 +80,7 @@ function arcopan_defer_scripts( $tag, $handle, $src ) {
 		'arcopan_defer_script_handles',
 		array(
 			'arcopan-global',
+			'arcopan-main',
 		)
 	);
 
