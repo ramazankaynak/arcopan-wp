@@ -1,0 +1,506 @@
+/**
+ * ARCOPAN Components Stylesheet
+ *
+ * Reusable component styles using BEM naming convention
+ * Mobile-first approach with min-width breakpoints
+ *
+ * @package ARCOPAN Child Theme
+ */
+
+/* ===================================================================
+   Product Card Component
+   =================================================================== */
+
+.arcopan-product-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-md, 1.5rem);
+	padding: var(--sp-md, 1.5rem);
+	border: 1px solid var(--c-border, #e5e7eb);
+	border-radius: var(--radius-md, 8px);
+	background-color: var(--c-bg-light, #ffffff);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.arcopan-product-card:hover {
+	box-shadow: var(--shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+	transform: translateY(-2px);
+}
+
+.arcopan-product-card__image {
+	width: 100%;
+	height: auto;
+	min-height: 200px;
+	overflow: hidden;
+	border-radius: var(--radius-md, 8px);
+	background-color: var(--c-bg-secondary, #f3f4f6);
+}
+
+.arcopan-product-card__image-element {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.arcopan-product-card__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-md, 1.5rem);
+}
+
+.arcopan-product-card__intro {
+	font-size: var(--text-sm, 0.875rem);
+	color: var(--c-text-2, #6b7280);
+	line-height: 1.6;
+}
+
+.arcopan-product-card__specs {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__specs-title {
+	font-size: var(--text-md, 1rem);
+	font-weight: 600;
+	color: var(--c-text-1, #111827);
+}
+
+.arcopan-product-card__specs-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.arcopan-product-card__specs-row {
+	border-bottom: 1px solid var(--c-border, #e5e7eb);
+}
+
+.arcopan-product-card__specs-row:last-child {
+	border-bottom: none;
+}
+
+.arcopan-product-card__specs-label {
+	padding: var(--sp-sm, 1rem) 0;
+	font-weight: 500;
+	color: var(--c-text-2, #6b7280);
+	font-size: var(--text-sm, 0.875rem);
+}
+
+.arcopan-product-card__specs-value {
+	padding: var(--sp-sm, 1rem) 0;
+	text-align: right;
+	color: var(--c-text-1, #111827);
+	font-size: var(--text-sm, 0.875rem);
+}
+
+.arcopan-product-card__temperature {
+	padding: var(--sp-sm, 1rem);
+	background-color: var(--c-bg-secondary, #f3f4f6);
+	border-radius: var(--radius-sm, 4px);
+	font-size: var(--text-sm, 0.875rem);
+}
+
+.arcopan-product-card__temperature strong {
+	color: var(--c-text-1, #111827);
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.arcopan-product-card__temperature span {
+	color: var(--c-primary, #3b82f6);
+	font-weight: 600;
+}
+
+.arcopan-product-card__certifications {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__certifications-title {
+	font-size: var(--text-md, 1rem);
+	font-weight: 600;
+	color: var(--c-text-1, #111827);
+}
+
+.arcopan-product-card__certifications-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__certifications-item {
+	padding: 0.25rem 0.75rem;
+	background-color: var(--c-primary, #3b82f6);
+	color: white;
+	border-radius: var(--radius-full, 9999px);
+	font-size: var(--text-xs, 0.75rem);
+	font-weight: 600;
+}
+
+.arcopan-product-card__datasheet {
+	margin-top: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__datasheet-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: var(--sp-sm, 1rem);
+	background-color: var(--c-primary, #3b82f6);
+	color: white;
+	text-decoration: none;
+	border-radius: var(--radius-md, 8px);
+	font-weight: 500;
+	font-size: var(--text-sm, 0.875rem);
+	transition: background-color 0.3s ease;
+}
+
+.arcopan-product-card__datasheet-link:hover {
+	background-color: var(--c-primary-dark, #2563eb);
+}
+
+.arcopan-product-card__datasheet-icon {
+	font-size: 1.25rem;
+}
+
+.arcopan-product-card__related {
+	margin-top: var(--sp-md, 1.5rem);
+	padding-top: var(--sp-md, 1.5rem);
+	border-top: 1px solid var(--c-border, #e5e7eb);
+}
+
+.arcopan-product-card__related-title {
+	font-size: var(--text-md, 1rem);
+	font-weight: 600;
+	color: var(--c-text-1, #111827);
+	margin-bottom: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__related-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-product-card__related-item a {
+	color: var(--c-primary, #3b82f6);
+	text-decoration: none;
+	font-size: var(--text-sm, 0.875rem);
+	transition: text-decoration 0.3s ease;
+}
+
+.arcopan-product-card__related-item a:hover {
+	text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+	.arcopan-product-card {
+		padding: var(--sp-lg, 2rem);
+	}
+
+	.arcopan-product-card__image {
+		min-height: 300px;
+	}
+
+	.arcopan-product-card__specs-value {
+		text-align: right;
+	}
+}
+
+@media (min-width: 1200px) {
+	.arcopan-product-card {
+		flex-direction: row;
+		gap: var(--sp-lg, 2rem);
+	}
+
+	.arcopan-product-card__image {
+		flex: 0 0 40%;
+		min-height: 400px;
+	}
+
+	.arcopan-product-card__content {
+		flex: 1;
+	}
+}
+
+/* ===================================================================
+   Project Card Component
+   =================================================================== */
+
+.arcopan-project-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-md, 1.5rem);
+	border: 1px solid var(--c-border, #e5e7eb);
+	border-radius: var(--radius-md, 8px);
+	overflow: hidden;
+	background-color: var(--c-bg-light, #ffffff);
+	transition: box-shadow 0.3s ease;
+}
+
+.arcopan-project-card:hover {
+	box-shadow: var(--shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+}
+
+.arcopan-project-card__gallery {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0;
+	width: 100%;
+	height: 250px;
+	overflow: hidden;
+}
+
+.arcopan-project-card__gallery-item {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	height: 100%;
+}
+
+.arcopan-project-card__gallery-item.is-featured {
+	grid-column: 1 / -1;
+}
+
+.arcopan-project-card__gallery-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+}
+
+.arcopan-project-card:hover .arcopan-project-card__gallery-image {
+	transform: scale(1.05);
+}
+
+.arcopan-project-card__content {
+	padding: var(--sp-md, 1.5rem);
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-md, 1.5rem);
+}
+
+.arcopan-project-card__header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-project-card__client,
+.arcopan-project-card__year {
+	font-size: var(--text-sm, 0.875rem);
+	color: var(--c-text-2, #6b7280);
+}
+
+.arcopan-project-card__client strong,
+.arcopan-project-card__year strong {
+	color: var(--c-text-1, #111827);
+	font-weight: 600;
+	margin-right: 0.5rem;
+}
+
+.arcopan-project-card__industry {
+	margin-bottom: var(--sp-sm, 1rem);
+}
+
+.arcopan-project-card__industry-badge {
+	display: inline-block;
+	padding: 0.25rem 0.75rem;
+	background-color: var(--c-primary, #3b82f6);
+	color: white;
+	border-radius: var(--radius-full, 9999px);
+	font-size: var(--text-xs, 0.75rem);
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.arcopan-project-card__highlight {
+	padding: var(--sp-md, 1.5rem);
+	background-color: var(--c-bg-secondary, #f3f4f6);
+	border-radius: var(--radius-md, 8px);
+}
+
+.arcopan-project-card__highlight-content {
+	font-size: var(--text-md, 1rem);
+	font-weight: 600;
+	color: var(--c-primary, #3b82f6);
+}
+
+.arcopan-project-card__footer {
+	margin-top: auto;
+	padding-top: var(--sp-md, 1.5rem);
+	border-top: 1px solid var(--c-border, #e5e7eb);
+}
+
+.arcopan-project-card__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--c-primary, #3b82f6);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: var(--text-sm, 0.875rem);
+	transition: gap 0.3s ease;
+}
+
+.arcopan-project-card__link:hover {
+	gap: 0.75rem;
+}
+
+.arcopan-project-card__link-arrow {
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+
+.arcopan-project-card__link:hover .arcopan-project-card__link-arrow {
+	transform: translateX(4px);
+}
+
+@media (min-width: 768px) {
+	.arcopan-project-card__gallery {
+		grid-template-columns: repeat(2, 1fr);
+		height: 300px;
+	}
+
+	.arcopan-project-card__gallery-item.is-featured {
+		grid-column: 1 / 3;
+	}
+
+	.arcopan-project-card__content {
+		padding: var(--sp-lg, 2rem);
+	}
+}
+
+/* ===================================================================
+   Trust Bar Component
+   =================================================================== */
+
+.arcopan-trust-bar {
+	background-color: var(--c-bg-secondary, #f3f4f6);
+	padding: var(--sp-lg, 2rem) 0;
+}
+
+.arcopan-trust-bar__container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 var(--sp-md, 1.5rem);
+}
+
+.arcopan-trust-bar__items {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--sp-md, 1.5rem);
+}
+
+.arcopan-trust-bar__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-trust-bar__icon {
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+}
+
+.arcopan-trust-bar__icon-image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.arcopan-trust-bar__label {
+	font-weight: 600;
+	font-size: var(--text-md, 1rem);
+	color: var(--c-text-1, #111827);
+}
+
+.arcopan-trust-bar__description {
+	font-size: var(--text-sm, 0.875rem);
+	color: var(--c-text-2, #6b7280);
+	line-height: 1.6;
+}
+
+.arcopan-trust-bar__empty {
+	padding: var(--sp-lg, 2rem);
+	text-align: center;
+	color: var(--c-text-3, #9ca3af);
+}
+
+@media (min-width: 768px) {
+	.arcopan-trust-bar__items {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--sp-lg, 2rem);
+	}
+}
+
+@media (min-width: 1200px) {
+	.arcopan-trust-bar__items {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* ===================================================================
+   Breadcrumb Component
+   =================================================================== */
+
+.arcopan-breadcrumb {
+	padding: var(--sp-md, 1.5rem) 0;
+	background-color: var(--c-bg-light, #ffffff);
+}
+
+.arcopan-breadcrumb__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-sm, 1rem);
+	font-size: var(--text-sm, 0.875rem);
+}
+
+.arcopan-breadcrumb__item {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-sm, 1rem);
+}
+
+.arcopan-breadcrumb__link {
+	color: var(--c-primary, #3b82f6);
+	text-decoration: none;
+	transition: text-decoration 0.3s ease;
+}
+
+.arcopan-breadcrumb__link:hover {
+	text-decoration: underline;
+}
+
+.arcopan-breadcrumb__text {
+	color: var(--c-text-1, #111827);
+	font-weight: 500;
+}
+
+.arcopan-breadcrumb__separator {
+	color: var(--c-text-3, #9ca3af);
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.arcopan-breadcrumb__separator {
+		display: inline;
+	}
+
+	.arcopan-breadcrumb__item {
+		gap: var(--sp-md, 1.5rem);
+	}
+}

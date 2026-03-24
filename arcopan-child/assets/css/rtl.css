@@ -1,0 +1,242 @@
+/**
+ * ARCOPAN RTL (Right-to-Left) Stylesheet
+ *
+ * RTL overrides for Arabic, Persian, and other RTL languages
+ * Applied when [dir="rtl"] is present on html element
+ *
+ * @package ARCOPAN Child Theme
+ */
+
+/* ===================================================================
+   Base RTL Overrides
+   =================================================================== */
+
+[dir="rtl"] {
+	direction: rtl;
+	text-align: right;
+}
+
+[dir="rtl"] body {
+	text-align: right;
+}
+
+/* ===================================================================
+   Text Alignment
+   =================================================================== */
+
+[dir="rtl"] .u-text-left {
+	text-align: right;
+}
+
+[dir="rtl"] .u-text-right {
+	text-align: left;
+}
+
+/* ===================================================================
+   Padding Directional
+   =================================================================== */
+
+[dir="rtl"] .u-pl-sm,
+[dir="rtl"] .u-p-sm {
+	padding-right: var(--sp-sm, 1rem);
+	padding-left: 0;
+}
+
+[dir="rtl"] .u-pl-md,
+[dir="rtl"] .u-p-md {
+	padding-right: var(--sp-md, 1.5rem);
+	padding-left: 0;
+}
+
+[dir="rtl"] .u-pl-lg,
+[dir="rtl"] .u-p-lg {
+	padding-right: var(--sp-lg, 2rem);
+	padding-left: 0;
+}
+
+[dir="rtl"] .u-pr-sm {
+	padding-left: var(--sp-sm, 1rem);
+	padding-right: 0;
+}
+
+[dir="rtl"] .u-pr-md {
+	padding-left: var(--sp-md, 1.5rem);
+	padding-right: 0;
+}
+
+[dir="rtl"] .u-pr-lg {
+	padding-left: var(--sp-lg, 2rem);
+	padding-right: 0;
+}
+
+/* ===================================================================
+   Margin Directional
+   =================================================================== */
+
+[dir="rtl"] .u-ml-sm {
+	margin-right: var(--sp-sm, 1rem);
+	margin-left: 0;
+}
+
+[dir="rtl"] .u-ml-md {
+	margin-right: var(--sp-md, 1.5rem);
+	margin-left: 0;
+}
+
+[dir="rtl"] .u-ml-lg {
+	margin-right: var(--sp-lg, 2rem);
+	margin-left: 0;
+}
+
+[dir="rtl"] .u-mr-sm {
+	margin-left: var(--sp-sm, 1rem);
+	margin-right: 0;
+}
+
+[dir="rtl"] .u-mr-md {
+	margin-left: var(--sp-md, 1.5rem);
+	margin-right: 0;
+}
+
+[dir="rtl"] .u-mr-lg {
+	margin-left: var(--sp-lg, 2rem);
+	margin-right: 0;
+}
+
+/* ===================================================================
+   Float
+   =================================================================== */
+
+[dir="rtl"] .u-float-left {
+	float: right;
+}
+
+[dir="rtl"] .u-float-right {
+	float: left;
+}
+
+/* ===================================================================
+   Border Radius
+   =================================================================== */
+
+[dir="rtl"] .arcopan-product-card__specs-table {
+	border-radius: var(--radius-md, 8px) 0 0 var(--radius-md, 8px);
+}
+
+[dir="rtl"] blockquote {
+	border-left: none;
+	border-right: 4px solid var(--c-primary, #3b82f6);
+	border-radius: var(--radius-md, 8px) 0 0 var(--radius-md, 8px);
+}
+
+/* ===================================================================
+   Flex Direction
+   =================================================================== */
+
+[dir="rtl"] .u-flex-row {
+	flex-direction: row-reverse;
+}
+
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+	padding-left: 0;
+	padding-right: var(--sp-md, 1.5rem);
+}
+
+[dir="rtl"] dl dt {
+	text-align: right;
+}
+
+/* ===================================================================
+   Component RTL Overrides: Breadcrumb
+   =================================================================== */
+
+[dir="rtl"] .arcopan-breadcrumb__list {
+	flex-direction: row-reverse;
+}
+
+/* ===================================================================
+   Component RTL Overrides: Product Card
+   =================================================================== */
+
+[dir="rtl"] .arcopan-product-card__specs-label {
+	text-align: right;
+}
+
+[dir="rtl"] .arcopan-product-card__specs-value {
+	text-align: left;
+}
+
+@media (min-width: 1200px) {
+	[dir="rtl"] .arcopan-product-card {
+		flex-direction: row-reverse;
+	}
+}
+
+/* ===================================================================
+   Component RTL Overrides: Trust Bar
+   =================================================================== */
+
+[dir="rtl"] .arcopan-trust-bar__item {
+	flex-direction: column-reverse;
+	text-align: center;
+}
+
+/* ===================================================================
+   Component RTL Overrides: Project Card
+   =================================================================== */
+
+[dir="rtl"] .arcopan-project-card__link {
+	flex-direction: row-reverse;
+}
+
+[dir="rtl"] .arcopan-project-card__link-arrow {
+	transform: scaleX(-1);
+}
+
+[dir="rtl"] .arcopan-project-card__link:hover .arcopan-project-card__link-arrow {
+	transform: translateX(-4px) scaleX(-1);
+}
+
+/* ===================================================================
+   Component RTL Overrides: List Items
+   =================================================================== */
+
+[dir="rtl"] li {
+	text-align: right;
+}
+
+[dir="rtl"] dd {
+	margin-left: 0;
+	margin-right: var(--sp-md, 1.5rem);
+}
+
+/* ===================================================================
+   Form Elements RTL
+   =================================================================== */
+
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+	text-align: right;
+	direction: rtl;
+}
+
+[dir="rtl"] input[type="checkbox"],
+[dir="rtl"] input[type="radio"] {
+	margin-left: var(--sp-sm, 1rem);
+	margin-right: 0;
+}
+
+[dir="rtl"] label {
+	text-align: right;
+}
+
+/* ===================================================================
+   Icon RTL Flip
+   =================================================================== */
+
+[dir="rtl"] .arcopan-product-card__datasheet-icon,
+[dir="rtl"] .arcopan-project-card__link-arrow {
+	transform: scaleX(-1);
+}
