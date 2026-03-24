@@ -1,0 +1,19 @@
+Project coding rules for ARCOPAN WP:
+
+- Scope: apply to all files (`**/*`).
+- Keep changes minimal and focused on requested task.
+- Do not refactor unrelated code.
+- Preserve existing behavior unless user explicitly requests change.
+- Use clear naming and keep functions small and readable.
+- Prefer existing project patterns over introducing new abstractions.
+- Add comments only for non-obvious logic.
+- Handle errors explicitly; avoid silent failures.
+- Avoid adding new dependencies unless necessary.
+- Keep text/content in Turkish where project content is Turkish.
+- For WordPress/PHP code:
+  - Follow WordPress coding standards where possible.
+  - Sanitize input and escape output (`sanitize_*`, `esc_*`, `wp_kses_*`).
+  - Use nonces and capability checks for admin/form actions.
+- Before finishing:
+  - Verify no obvious syntax issues in edited files.
+  - Summarize changed files and why.
