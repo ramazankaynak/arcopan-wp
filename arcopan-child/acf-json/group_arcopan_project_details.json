@@ -1,0 +1,289 @@
+{
+  "key": "group_arcopan_project_details",
+  "title": "Project Details",
+  "fields": [
+    {
+      "key": "field_arc_headline_metric",
+      "label": "Headline Metric",
+      "name": "headline_metric",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "e.g. 4,500 m² Cold Storage Facility",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_client_name",
+      "label": "Client Name",
+      "name": "client_name",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_project_location",
+      "label": "Project Location",
+      "name": "project_location",
+      "type": "text",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "e.g. Warsaw, Poland",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_year_completed",
+      "label": "Year Completed",
+      "name": "year_completed",
+      "type": "number",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "min": 2000,
+      "max": 2099,
+      "step": ""
+    },
+    {
+      "key": "field_arc_gallery",
+      "label": "Project Gallery",
+      "name": "gallery",
+      "type": "gallery",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "insert": "append",
+      "library": "all",
+      "min": "",
+      "max": 20,
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": ""
+    },
+    {
+      "key": "field_arc_project_scope",
+      "label": "Project Scope",
+      "name": "project_scope",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "maxlength": "",
+      "rows": 4,
+      "new_lines": "wpautop"
+    },
+    {
+      "key": "field_arc_temperature_spec",
+      "label": "Temperature Specification",
+      "name": "temperature_spec",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "e.g. -22°C to +2°C",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_project_related_products",
+      "label": "Related Products",
+      "name": "project_related_products",
+      "type": "relationship",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "arcopan_product"
+      ],
+      "taxonomy": [],
+      "filters": [
+        "search",
+        "post_type",
+        "taxonomy"
+      ],
+      "elements": "",
+      "min": "",
+      "max": 10,
+      "return_format": "object"
+    },
+    {
+      "key": "field_arc_project_testimonial",
+      "label": "Project Testimonial",
+      "name": "project_testimonial",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "maxlength": "",
+      "rows": 3,
+      "new_lines": "wpautop"
+    },
+    {
+      "key": "field_arc_testimonial_author",
+      "label": "Testimonial Author",
+      "name": "testimonial_author",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "e.g. Jan Kowalski, Logistics Director",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_project_map_lat",
+      "label": "Project Map Latitude",
+      "name": "project_map_lat",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "52.2297",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_project_map_lng",
+      "label": "Project Map Longitude",
+      "name": "project_map_lng",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "21.0122",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_featured_project",
+      "label": "Featured Project",
+      "name": "featured_project",
+      "type": "true_false",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "message": "Show on homepage",
+      "default_value": 0,
+      "ui": 1,
+      "ui_on_text": "",
+      "ui_off_text": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "arcopan_project"
+      }
+    ]
+  ],
+  "menu_order": 10,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": true
+}

@@ -1,0 +1,329 @@
+{
+  "key": "group_arcopan_product_details",
+  "title": "Product Details",
+  "fields": [
+    {
+      "key": "field_arc_hero_image",
+      "label": "Hero Image",
+      "name": "hero_image",
+      "type": "image",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": ""
+    },
+    {
+      "key": "field_arc_product_intro",
+      "label": "Product Introduction",
+      "name": "product_intro",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "maxlength": "",
+      "rows": 4,
+      "new_lines": "wpautop"
+    },
+    {
+      "key": "field_arc_temperature_range",
+      "label": "Temperature Range",
+      "name": "temperature_range",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "-25°C to +4°C",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_spec_table",
+      "label": "Specifications Table",
+      "name": "spec_table",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "collapsed": "",
+      "min": 0,
+      "max": 0,
+      "layout": "table",
+      "button_label": "Add Specification Row",
+      "sub_fields": [
+        {
+          "key": "field_arc_spec_label",
+          "label": "Specification Label",
+          "name": "spec_label",
+          "type": "text",
+          "instructions": "",
+          "required": 1,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+        },
+        {
+          "key": "field_arc_spec_value",
+          "label": "Specification Value",
+          "name": "spec_value",
+          "type": "text",
+          "instructions": "",
+          "required": 1,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+        }
+      ]
+    },
+    {
+      "key": "field_arc_certifications",
+      "label": "Certifications",
+      "name": "certifications",
+      "type": "checkbox",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "iso_9001": "ISO 9001",
+        "en_13165": "EN 13165",
+        "din": "DIN",
+        "ce": "CE",
+        "atex": "ATEX",
+        "haccp": "HACCP",
+        "gdp": "GDP",
+        "gmp": "GMP",
+        "other": "Other"
+      },
+      "default_value": [],
+      "layout": "vertical",
+      "toggle": 0,
+      "return_format": "value"
+    },
+    {
+      "key": "field_arc_datasheet_pdf",
+      "label": "Datasheet PDF",
+      "name": "datasheet_pdf",
+      "type": "file",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "min_size": "",
+      "max_size": "",
+      "mime_types": "pdf"
+    },
+    {
+      "key": "field_arc_cad_file",
+      "label": "CAD File",
+      "name": "cad_file",
+      "type": "file",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "min_size": "",
+      "max_size": "",
+      "mime_types": "dwg,step,stp"
+    },
+    {
+      "key": "field_arc_related_products",
+      "label": "Related Products",
+      "name": "related_products",
+      "type": "relationship",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "arcopan_product"
+      ],
+      "taxonomy": [],
+      "filters": [
+        "search",
+        "post_type",
+        "taxonomy"
+      ],
+      "elements": "",
+      "min": "",
+      "max": 4,
+      "return_format": "object"
+    },
+    {
+      "key": "field_arc_related_solutions",
+      "label": "Related Solutions",
+      "name": "related_solutions",
+      "type": "relationship",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "page"
+      ],
+      "taxonomy": [],
+      "filters": [
+        "search",
+        "post_type"
+      ],
+      "elements": "",
+      "min": "",
+      "max": 3,
+      "return_format": "object"
+    },
+    {
+      "key": "field_arc_related_industries",
+      "label": "Related Industries",
+      "name": "related_industries",
+      "type": "relationship",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "page"
+      ],
+      "taxonomy": [],
+      "filters": [
+        "search",
+        "post_type"
+      ],
+      "elements": "",
+      "min": "",
+      "max": 3,
+      "return_format": "object"
+    },
+    {
+      "key": "field_arc_display_in_mega_menu",
+      "label": "Display in Mega Menu",
+      "name": "display_in_mega_menu",
+      "type": "true_false",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "message": "",
+      "default_value": 0,
+      "ui": 1,
+      "ui_on_text": "",
+      "ui_off_text": ""
+    },
+    {
+      "key": "field_arc_featured_product",
+      "label": "Featured Product",
+      "name": "featured_product",
+      "type": "true_false",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "message": "Show on homepage",
+      "default_value": 0,
+      "ui": 1,
+      "ui_on_text": "",
+      "ui_off_text": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "arcopan_product"
+      }
+    ]
+  ],
+  "menu_order": 10,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": true
+}

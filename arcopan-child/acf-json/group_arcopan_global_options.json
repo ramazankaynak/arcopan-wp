@@ -1,0 +1,244 @@
+{
+  "key": "group_arcopan_global_options",
+  "title": "ARCOPAN Global Options",
+  "fields": [
+    {
+      "key": "field_arc_rfq_notification_email",
+      "label": "RFQ Notification Email",
+      "name": "rfq_notification_email",
+      "type": "email",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "sales@arcopan.com",
+      "placeholder": ""
+    },
+    {
+      "key": "field_arc_company_phone",
+      "label": "Company Phone",
+      "name": "company_phone",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "+90 xxx xxx xx xx",
+      "prepend": "",
+      "append": "",
+      "maxlength": ""
+    },
+    {
+      "key": "field_arc_company_email",
+      "label": "Company Email",
+      "name": "company_email",
+      "type": "email",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": ""
+    },
+    {
+      "key": "field_arc_company_address",
+      "label": "Company Address",
+      "name": "company_address",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "maxlength": "",
+      "rows": 3,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_arc_stats_bar",
+      "label": "Statistics Bar",
+      "name": "stats_bar",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "collapsed": "",
+      "min": 3,
+      "max": 6,
+      "layout": "table",
+      "button_label": "Add Stat",
+      "sub_fields": [
+        {
+          "key": "field_arc_stat_number",
+          "label": "Stat Number",
+          "name": "stat_number",
+          "type": "text",
+          "instructions": "",
+          "required": 1,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "25+",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+        },
+        {
+          "key": "field_arc_stat_label",
+          "label": "Stat Label",
+          "name": "stat_label",
+          "type": "text",
+          "instructions": "",
+          "required": 1,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "Countries Served",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+        }
+      ]
+    },
+    {
+      "key": "field_arc_trust_logos",
+      "label": "Trust Logos",
+      "name": "trust_logos",
+      "type": "gallery",
+      "instructions": "Client logos for trust section",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "insert": "append",
+      "library": "all",
+      "min": "",
+      "max": 8,
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": ""
+    },
+    {
+      "key": "field_arc_cert_logos",
+      "label": "Certification Logos",
+      "name": "cert_logos",
+      "type": "gallery",
+      "instructions": "Certification badges for trust section",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "insert": "append",
+      "library": "all",
+      "min": "",
+      "max": 8,
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": ""
+    },
+    {
+      "key": "field_arc_linkedin_url",
+      "label": "LinkedIn URL",
+      "name": "linkedin_url",
+      "type": "url",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": ""
+    },
+    {
+      "key": "field_arc_rfq_response_time",
+      "label": "RFQ Response Time (hours)",
+      "name": "rfq_response_time",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 48,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "min": 1,
+      "max": 168,
+      "step": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "arcopan-options"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": false
+}
