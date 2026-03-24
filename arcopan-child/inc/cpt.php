@@ -8,121 +8,157 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Register a single post type from config.
- *
- * @param string $post_type Post type slug.
- * @param array  $config    Post type labels and settings.
- * @return void
- */
-function arcopan_register_single_cpt( $post_type, array $config ) {
-	$defaults = array(
-		'singular'           => ucfirst( $post_type ),
-		'plural'             => ucfirst( $post_type ) . 's',
-		'menu_icon'          => 'dashicons-admin-post',
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes' ),
-		'taxonomies'         => array(),
-		'rewrite'            => array( 'slug' => $post_type, 'with_front' => false ),
-		'public'             => true,
-		'has_archive'        => true,
-		'show_in_rest'       => true,
-		'exclude_from_search'=> false,
-	);
-
-	$settings = wp_parse_args( $config, $defaults );
-
-	$labels = array(
-		'name'                  => $settings['plural'],
-		'singular_name'         => $settings['singular'],
-		'menu_name'             => $settings['plural'],
-		'name_admin_bar'        => $settings['singular'],
-		'add_new'               => __( 'Add New', 'arcopan-child' ),
-		'add_new_item'          => sprintf( __( 'Add New %s', 'arcopan-child' ), $settings['singular'] ),
-		'edit_item'             => sprintf( __( 'Edit %s', 'arcopan-child' ), $settings['singular'] ),
-		'new_item'              => sprintf( __( 'New %s', 'arcopan-child' ), $settings['singular'] ),
-		'view_item'             => sprintf( __( 'View %s', 'arcopan-child' ), $settings['singular'] ),
-		'view_items'            => sprintf( __( 'View %s', 'arcopan-child' ), $settings['plural'] ),
-		'search_items'          => sprintf( __( 'Search %s', 'arcopan-child' ), $settings['plural'] ),
-		'not_found'             => sprintf( __( 'No %s found', 'arcopan-child' ), strtolower( $settings['plural'] ) ),
-		'not_found_in_trash'    => sprintf( __( 'No %s found in Trash', 'arcopan-child' ), strtolower( $settings['plural'] ) ),
-		'all_items'             => sprintf( __( 'All %s', 'arcopan-child' ), $settings['plural'] ),
-		'archives'              => sprintf( __( '%s Archives', 'arcopan-child' ), $settings['singular'] ),
-		'attributes'            => sprintf( __( '%s Attributes', 'arcopan-child' ), $settings['singular'] ),
-		'insert_into_item'      => sprintf( __( 'Insert into %s', 'arcopan-child' ), strtolower( $settings['singular'] ) ),
-		'uploaded_to_this_item' => sprintf( __( 'Uploaded to this %s', 'arcopan-child' ), strtolower( $settings['singular'] ) ),
-	);
-
-	$args = array(
-		'labels'             => $labels,
-		'public'             => (bool) $settings['public'],
-		'has_archive'        => (bool) $settings['has_archive'],
-		'show_in_rest'       => (bool) $settings['show_in_rest'],
-		'exclude_from_search'=> (bool) $settings['exclude_from_search'],
-		'rewrite'            => (array) $settings['rewrite'],
-		'supports'           => (array) $settings['supports'],
-		'taxonomies'         => (array) $settings['taxonomies'],
-		'menu_icon'          => (string) $settings['menu_icon'],
-		'menu_position'      => 20,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'capability_type'    => 'post',
-	);
-
-	register_post_type( $post_type, $args );
-}
-
-/**
  * Register ARCOPAN custom post types.
  *
  * @return void
  */
-function arcopan_register_cpts() {
-	$cpts = array(
-		'arc_product'  => array(
-			'singular'  => __( 'Product', 'arcopan-child' ),
-			'plural'    => __( 'Products', 'arcopan-child' ),
-			'menu_icon' => 'dashicons-products',
-			'rewrite'   => array( 'slug' => 'products', 'with_front' => false ),
+function arcopan_register_custom_post_types() {
+	// CPT 1: Product
+	register_post_type( 'arcopan_product', array(
+		'label'              => __( 'Product', 'arcopan' ),
+		'labels'             => array(
+			'name'               => __( 'Products', 'arcopan' ),
+			'singular_name'      => __( 'Product', 'arcopan' ),
+			'menu_name'          => __( 'Products', 'arcopan' ),
+			'add_new'            => __( 'Add New Product', 'arcopan' ),
+			'add_new_item'       => __( 'Add New Product', 'arcopan' ),
+			'edit_item'          => __( 'Edit Product', 'arcopan' ),
+			'view_item'          => __( 'View Product', 'arcopan' ),
+			'view_items'         => __( 'View Products', 'arcopan' ),
+			'search_items'       => __( 'Search Products', 'arcopan' ),
+			'not_found'          => __( 'No products found', 'arcopan' ),
+			'not_found_in_trash' => __( 'No products found in trash', 'arcopan' ),
+			'all_items'          => __( 'All Products', 'arcopan' ),
+			'archives'           => __( 'Product Archives', 'arcopan' ),
+			'back_to_items'      => __( 'Back to Products', 'arcopan' ),
 		),
-		'arc_solution' => array(
-			'singular'  => __( 'Solution', 'arcopan-child' ),
-			'plural'    => __( 'Solutions', 'arcopan-child' ),
-			'menu_icon' => 'dashicons-lightbulb',
-			'rewrite'   => array( 'slug' => 'solutions', 'with_front' => false ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_rest'       => true,
+		'has_archive'        => true,
+		'menu_position'      => 5,
+		'menu_icon'          => 'dashicons-archive',
+		'supports'           => array( 'title', 'thumbnail', 'editor', 'custom-fields' ),
+		'rewrite'            => array(
+			'slug'       => 'products',
+			'with_front' => true,
 		),
-		'arc_industry' => array(
-			'singular'  => __( 'Industry', 'arcopan-child' ),
-			'plural'    => __( 'Industries', 'arcopan-child' ),
-			'menu_icon' => 'dashicons-building',
-			'rewrite'   => array( 'slug' => 'industries', 'with_front' => false ),
-		),
-		'arc_project'  => array(
-			'singular'  => __( 'Project', 'arcopan-child' ),
-			'plural'    => __( 'Projects', 'arcopan-child' ),
-			'menu_icon' => 'dashicons-portfolio',
-			'rewrite'   => array( 'slug' => 'projects', 'with_front' => false ),
-		),
-		'arc_resource' => array(
-			'singular'  => __( 'Resource', 'arcopan-child' ),
-			'plural'    => __( 'Resources', 'arcopan-child' ),
-			'menu_icon' => 'dashicons-media-document',
-			'rewrite'   => array( 'slug' => 'resources', 'with_front' => false ),
-		),
-	);
+		'capability_type'    => 'post',
+		'taxonomies'         => array(),
+	) );
 
-	/**
-	 * Filter CPT map to align with project document revisions.
-	 *
-	 * @param array $cpts CPT definitions.
-	 */
-	$cpts = apply_filters( 'arcopan_cpt_map', $cpts );
+	// CPT 2: Project
+	register_post_type( 'arcopan_project', array(
+		'label'              => __( 'Project', 'arcopan' ),
+		'labels'             => array(
+			'name'               => __( 'Projects', 'arcopan' ),
+			'singular_name'      => __( 'Project', 'arcopan' ),
+			'menu_name'          => __( 'Projects', 'arcopan' ),
+			'add_new'            => __( 'Add New Project', 'arcopan' ),
+			'add_new_item'       => __( 'Add New Project', 'arcopan' ),
+			'edit_item'          => __( 'Edit Project', 'arcopan' ),
+			'view_item'          => __( 'View Project', 'arcopan' ),
+			'view_items'         => __( 'View Projects', 'arcopan' ),
+			'search_items'       => __( 'Search Projects', 'arcopan' ),
+			'not_found'          => __( 'No projects found', 'arcopan' ),
+			'not_found_in_trash' => __( 'No projects found in trash', 'arcopan' ),
+			'all_items'          => __( 'All Projects', 'arcopan' ),
+			'archives'           => __( 'Project Archives', 'arcopan' ),
+			'back_to_items'      => __( 'Back to Projects', 'arcopan' ),
+		),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_rest'       => true,
+		'has_archive'        => true,
+		'menu_position'      => 6,
+		'menu_icon'          => 'dashicons-portfolio',
+		'supports'           => array( 'title', 'thumbnail', 'excerpt', 'custom-fields' ),
+		'rewrite'            => array(
+			'slug'       => 'projects',
+			'with_front' => true,
+		),
+		'capability_type'    => 'post',
+		'taxonomies'         => array(),
+	) );
 
-	foreach ( $cpts as $post_type => $config ) {
-		arcopan_register_single_cpt( $post_type, (array) $config );
-	}
+	// CPT 3: Team Member
+	register_post_type( 'arcopan_team_member', array(
+		'label'              => __( 'Team Member', 'arcopan' ),
+		'labels'             => array(
+			'name'               => __( 'Team Members', 'arcopan' ),
+			'singular_name'      => __( 'Team Member', 'arcopan' ),
+			'menu_name'          => __( 'Team Members', 'arcopan' ),
+			'add_new'            => __( 'Add New Team Member', 'arcopan' ),
+			'add_new_item'       => __( 'Add New Team Member', 'arcopan' ),
+			'edit_item'          => __( 'Edit Team Member', 'arcopan' ),
+			'view_item'          => __( 'View Team Member', 'arcopan' ),
+			'view_items'         => __( 'View Team Members', 'arcopan' ),
+			'search_items'       => __( 'Search Team Members', 'arcopan' ),
+			'not_found'          => __( 'No team members found', 'arcopan' ),
+			'not_found_in_trash' => __( 'No team members found in trash', 'arcopan' ),
+			'all_items'          => __( 'All Team Members', 'arcopan' ),
+			'archives'           => __( 'Team Member Archives', 'arcopan' ),
+			'back_to_items'      => __( 'Back to Team Members', 'arcopan' ),
+		),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_rest'       => true,
+		'has_archive'        => false,
+		'menu_position'      => 7,
+		'menu_icon'          => 'dashicons-groups',
+		'supports'           => array( 'title', 'thumbnail', 'custom-fields' ),
+		'rewrite'            => array(
+			'slug'       => 'team',
+			'with_front' => true,
+		),
+		'capability_type'    => 'post',
+		'taxonomies'         => array(),
+	) );
+
+	// CPT 4: Certificate
+	register_post_type( 'arcopan_certificate', array(
+		'label'              => __( 'Certificate', 'arcopan' ),
+		'labels'             => array(
+			'name'               => __( 'Certificates', 'arcopan' ),
+			'singular_name'      => __( 'Certificate', 'arcopan' ),
+			'menu_name'          => __( 'Certificates', 'arcopan' ),
+			'add_new'            => __( 'Add New Certificate', 'arcopan' ),
+			'add_new_item'       => __( 'Add New Certificate', 'arcopan' ),
+			'edit_item'          => __( 'Edit Certificate', 'arcopan' ),
+			'view_item'          => __( 'View Certificate', 'arcopan' ),
+			'view_items'         => __( 'View Certificates', 'arcopan' ),
+			'search_items'       => __( 'Search Certificates', 'arcopan' ),
+			'not_found'          => __( 'No certificates found', 'arcopan' ),
+			'not_found_in_trash' => __( 'No certificates found in trash', 'arcopan' ),
+			'all_items'          => __( 'All Certificates', 'arcopan' ),
+			'archives'           => __( 'Certificate Archives', 'arcopan' ),
+			'back_to_items'      => __( 'Back to Certificates', 'arcopan' ),
+		),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_rest'       => true,
+		'has_archive'        => false,
+		'menu_position'      => 8,
+		'menu_icon'          => 'dashicons-awards',
+		'supports'           => array( 'title', 'custom-fields' ),
+		'rewrite'            => array(
+			'slug'       => 'certificates',
+			'with_front' => true,
+		),
+		'capability_type'    => 'post',
+		'taxonomies'         => array(),
+	) );
 }
-add_action( 'init', 'arcopan_register_cpts' );
+
+add_action( 'init', 'arcopan_register_custom_post_types' );
 
 /**
  * Flush rewrite rules once when the theme is switched.
@@ -130,7 +166,7 @@ add_action( 'init', 'arcopan_register_cpts' );
  * @return void
  */
 function arcopan_child_flush_rewrite_rules() {
-	arcopan_register_cpts();
+	arcopan_register_custom_post_types();
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'arcopan_child_flush_rewrite_rules' );
