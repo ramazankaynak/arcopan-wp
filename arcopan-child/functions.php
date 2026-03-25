@@ -95,6 +95,7 @@ function arcopan_load_includes() {
 		'inc/acf-fields.php',
 		'inc/seo.php',
 		'inc/forms.php',
+		'inc/multilingual.php',
 	);
 
 	foreach ( $includes as $include_file ) {

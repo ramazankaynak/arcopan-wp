@@ -1,0 +1,720 @@
+{
+  "name": "ARCOPAN - DeepL Translation Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "arcopan-translate",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook_trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [60, 100]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.post_id }}",
+              "operation": "exists"
+            },
+            {
+              "value1": "={{ $json.title }}",
+              "operation": "notEmpty"
+            },
+            {
+              "value1": "={{ $json.content }}",
+              "operation": "notEmpty"
+            },
+            {
+              "value1": "={{ $json.slug }}",
+              "operation": "notEmpty"
+            }
+          ]
+        }
+      },
+      "id": "validate_payload",
+      "name": "Validate Payload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [300, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Clean HTML content for translation\nfunction cleanHTML(html) {\n  if (!html) return '';\n  \n  // Remove script and style tags\n  html = html.replace(/<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>/gi, '');\n  html = html.replace(/<style\\b[^<]*(?:(?!<\\/style>)<[^<]*)*<\\/style>/gi, '');\n  \n  // Remove HTML comments\n  html = html.replace(/<!--.*?-->/gs, '');\n  \n  // Remove event handlers\n  html = html.replace(/\\s*(onclick|onload|onerror|onmouseover)\\s*=\\s*\"[^\"]*\"/gi, '');\n  \n  // Remove class, id, style attributes\n  html = html.replace(/\\s*class\\s*=\\s*\"[^\"]*\"/gi, '');\n  html = html.replace(/\\s*id\\s*=\\s*\"[^\"]*\"/gi, '');\n  html = html.replace(/\\s*style\\s*=\\s*\"[^\"]*\"/gi, '');\n  \n  // Convert div to p\n  html = html.replace(/<div\\b[^>]*>/gi, '<p>');\n  html = html.replace(/<\\/div>/gi, '</p>');\n  \n  // Remove span tags but keep content\n  html = html.replace(/<span\\b[^>]*>/gi, '');\n  html = html.replace(/<\\/span>/gi, '');\n  \n  // Remove empty tags\n  html = html.replace(/<p>\\s*<\\/p>/gi, '');\n  html = html.replace(/<h[2-4]>\\s*<\\/h[2-4]>/gi, '');\n  \n  // Collapse multiple whitespace\n  html = html.replace(/\\s{2,}/g, ' ');\n  \n  return html.trim();\n}\n\nreturn {\n  post_id: $json.post_id,\n  title: $json.title,\n  excerpt: $json.excerpt || '',\n  content: cleanHTML($json.content),\n  slug: $json.slug,\n  post_type: $json.post_type,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "id": "clean_html",
+      "name": "Clean HTML Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [500, 100]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api-free.deepl.com/v2/usage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "check_deepl_quota",
+      "name": "Check DeepL Quota",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [700, 100],
+      "credentials": {
+        "httpHeaderAuth": "deepl_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ ($json.character_limit - $json.character_count) }}",
+              "operation": "gt",
+              "value2": 20000
+            }
+          ]
+        }
+      },
+      "id": "quota_sufficient",
+      "name": "Quota Sufficient?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api-free.deepl.com/v2/translate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": [
+          {
+            "name": "auth_key",
+            "value": "={{ $env.DEEPL_API_KEY }}"
+          },
+          {
+            "name": "text",
+            "value": "={{ $('clean_html').json.content }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "TR"
+          },
+          {
+            "name": "source_lang",
+            "value": "EN"
+          },
+          {
+            "name": "tag_handling",
+            "value": "html"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "1"
+          },
+          {
+            "name": "split_sentences",
+            "value": "off"
+          }
+        ],
+        "options": {}
+      },
+      "id": "translate_to_turkish",
+      "name": "Translate to Turkish (TR)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1100, 50],
+      "credentials": {
+        "httpHeaderAuth": "deepl_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api-free.deepl.com/v2/translate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": [
+          {
+            "name": "auth_key",
+            "value": "={{ $env.DEEPL_API_KEY }}"
+          },
+          {
+            "name": "text",
+            "value": "={{ $('clean_html').json.content }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "FR"
+          },
+          {
+            "name": "source_lang",
+            "value": "EN"
+          },
+          {
+            "name": "tag_handling",
+            "value": "html"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "1"
+          },
+          {
+            "name": "split_sentences",
+            "value": "off"
+          }
+        ],
+        "options": {}
+      },
+      "id": "translate_to_french",
+      "name": "Translate to French (FR)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1100, 150],
+      "credentials": {
+        "httpHeaderAuth": "deepl_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api-free.deepl.com/v2/translate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": [
+          {
+            "name": "auth_key",
+            "value": "={{ $env.DEEPL_API_KEY }}"
+          },
+          {
+            "name": "text",
+            "value": "={{ $('clean_html').json.content }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "DE"
+          },
+          {
+            "name": "source_lang",
+            "value": "EN"
+          },
+          {
+            "name": "tag_handling",
+            "value": "html"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "1"
+          },
+          {
+            "name": "split_sentences",
+            "value": "off"
+          }
+        ],
+        "options": {}
+      },
+      "id": "translate_to_german",
+      "name": "Translate to German (DE)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1100, 250],
+      "credentials": {
+        "httpHeaderAuth": "deepl_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api-free.deepl.com/v2/translate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": [
+          {
+            "name": "auth_key",
+            "value": "={{ $env.DEEPL_API_KEY }}"
+          },
+          {
+            "name": "text",
+            "value": "={{ $('clean_html').json.content }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "RU"
+          },
+          {
+            "name": "source_lang",
+            "value": "EN"
+          },
+          {
+            "name": "tag_handling",
+            "value": "html"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "1"
+          },
+          {
+            "name": "split_sentences",
+            "value": "off"
+          }
+        ],
+        "options": {}
+      },
+      "id": "translate_to_russian",
+      "name": "Translate to Russian (RU)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1100, 350],
+      "credentials": {
+        "httpHeaderAuth": "deepl_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Also translate title and excerpt\nconst titleTR = await this.helpers.httpRequest({\n  method: 'POST',\n  url: 'https://api-free.deepl.com/v2/translate',\n  headers: {\n    'Authorization': `DeepL-Auth-Key ${this.getEnvVariable('DEEPL_API_KEY')}`\n  },\n  body: new URLSearchParams({\n    'auth_key': this.getEnvVariable('DEEPL_API_KEY'),\n    'text': this.getNode('webhook_trigger').json.title,\n    'target_lang': 'TR',\n    'source_lang': 'EN'\n  })\n});\n\nreturn {\n  tr: {\n    title: titleTR?.translations?.[0]?.text || '',\n    excerpt: $('translate_to_turkish').json.excerpt || '',\n    content: $('translate_to_turkish').json.translations?.[0]?.text || ''\n  },\n  fr: {\n    title: '',\n    excerpt: '',\n    content: $('translate_to_french').json.translations?.[0]?.text || ''\n  },\n  de: {\n    title: '',\n    excerpt: '',\n    content: $('translate_to_german').json.translations?.[0]?.text || ''\n  },\n  ru: {\n    title: '',\n    excerpt: '',\n    content: $('translate_to_russian').json.translations?.[0]?.text || ''\n  }\n};"
+      },
+      "id": "normalize_translations",
+      "name": "Normalize Translations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1350, 150]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/wp/v2/posts",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"title\": \"{{ $('normalize_translations').json.tr.title }}\",\n  \"excerpt\": \"{{ $('clean_html').json.excerpt }}\",\n  \"content\": \"{{ $('normalize_translations').json.tr.content }}\",\n  \"status\": \"draft\",\n  \"meta\": {\n    \"_arcopan_source_post_id\": {{ $('webhook_trigger').json.post_id }},\n    \"_arcopan_translation_language\": \"tr\",\n    \"_translation_locked\": false\n  }\n}",
+        "options": {}
+      },
+      "id": "create_post_turkish",
+      "name": "Create Post - Turkish",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1550, 50],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/wp/v2/posts",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"title\": \"{{ $('normalize_translations').json.fr.title }}\",\n  \"excerpt\": \"{{ $('clean_html').json.excerpt }}\",\n  \"content\": \"{{ $('normalize_translations').json.fr.content }}\",\n  \"status\": \"draft\",\n  \"meta\": {\n    \"_arcopan_source_post_id\": {{ $('webhook_trigger').json.post_id }},\n    \"_arcopan_translation_language\": \"fr\",\n    \"_translation_locked\": false\n  }\n}",
+        "options": {}
+      },
+      "id": "create_post_french",
+      "name": "Create Post - French",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1550, 150],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/wp/v2/posts",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"title\": \"{{ $('normalize_translations').json.de.title }}\",\n  \"excerpt\": \"{{ $('clean_html').json.excerpt }}\",\n  \"content\": \"{{ $('normalize_translations').json.de.content }}\",\n  \"status\": \"draft\",\n  \"meta\": {\n    \"_arcopan_source_post_id\": {{ $('webhook_trigger').json.post_id }},\n    \"_arcopan_translation_language\": \"de\",\n    \"_translation_locked\": false\n  }\n}",
+        "options": {}
+      },
+      "id": "create_post_german",
+      "name": "Create Post - German",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1550, 250],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/wp/v2/posts",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"title\": \"{{ $('normalize_translations').json.ru.title }}\",\n  \"excerpt\": \"{{ $('clean_html').json.excerpt }}\",\n  \"content\": \"{{ $('normalize_translations').json.ru.content }}\",\n  \"status\": \"draft\",\n  \"meta\": {\n    \"_arcopan_source_post_id\": {{ $('webhook_trigger').json.post_id }},\n    \"_arcopan_translation_language\": \"ru\",\n    \"_translation_locked\": false\n  }\n}",
+        "options": {}
+      },
+      "id": "create_post_russian",
+      "name": "Create Post - Russian",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1550, 350],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/polylang/v1/posts/{{ $('create_post_turkish').json.id }}/languages",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"language\": \"tr\"\n}",
+        "options": {}
+      },
+      "id": "assign_language_turkish",
+      "name": "Assign Language - Turkish",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1750, 50],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/polylang/v1/posts/{{ $('create_post_french').json.id }}/languages",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"language\": \"fr\"\n}",
+        "options": {}
+      },
+      "id": "assign_language_french",
+      "name": "Assign Language - French",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1750, 150],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/polylang/v1/posts/{{ $('create_post_german').json.id }}/languages",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"language\": \"de\"\n}",
+        "options": {}
+      },
+      "id": "assign_language_german",
+      "name": "Assign Language - German",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1750, 250],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WP_API_URL }}/wp-json/polylang/v1/posts/{{ $('create_post_russian').json.id }}/languages",
+        "authentication": "basicAuth",
+        "sendBody": true,
+        "bodyParametersUi": "json",
+        "body": "{\n  \"language\": \"ru\"\n}",
+        "options": {}
+      },
+      "id": "assign_language_russian",
+      "name": "Assign Language - Russian",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1750, 350],
+      "credentials": {
+        "basicAuth": "wordpress_api_auth"
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{ $env.ADMIN_EMAIL }}",
+        "subject": "[ARCOPAN] Translation Workflow Complete - Post {{ $('webhook_trigger').json.post_id }}",
+        "text": "Translation workflow completed successfully.\n\nPost ID: {{ $('webhook_trigger').json.post_id }}\nTitle: {{ $('webhook_trigger').json.title }}\n\nCreated Posts:\n- Turkish: {{ $('create_post_turkish').json.id }}\n- French: {{ $('create_post_french').json.id }}\n- German: {{ $('create_post_german').json.id }}\n- Russian: {{ $('create_post_russian').json.id }}\n\nStatus: Draft (requires review)\nLink: {{ $env.WP_API_URL }}/wp-admin/post.php?post={{ $('webhook_trigger').json.post_id }}&action=edit\n\nTimestamp: {{ $now.toIso() }}"
+      },
+      "id": "notify_admin_success",
+      "name": "Notify Admin - Success",
+      "type": "n8n-nodes-base.sendGrid",
+      "typeVersion": 2,
+      "position": [1950, 150],
+      "credentials": {
+        "sendGridApi": "sendgrid_api"
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{ $env.ADMIN_EMAIL }}",
+        "subject": "[ARCOPAN] Translation Workflow Error - Post {{ $('webhook_trigger').json.post_id }}",
+        "text": "Translation workflow encountered an error.\n\nPost ID: {{ $('webhook_trigger').json.post_id }}\nError: {{ $error.message }}\n\nManual action required. Please review the n8n execution logs.\n\nTimestamp: {{ $now.toIso() }}"
+      },
+      "id": "notify_admin_error",
+      "name": "Notify Admin - Error",
+      "type": "n8n-nodes-base.sendGrid",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "credentials": {
+        "sendGridApi": "sendgrid_api"
+      }
+    }
+  ],
+  "connections": {
+    "webhook_trigger": {
+      "main": [
+        [
+          {
+            "node": "validate_payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "validate_payload": {
+      "main": [
+        [
+          {
+            "node": "clean_html",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "notify_admin_error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_html": {
+      "main": [
+        [
+          {
+            "node": "check_deepl_quota",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_deepl_quota": {
+      "main": [
+        [
+          {
+            "node": "quota_sufficient",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "quota_sufficient": {
+      "main": [
+        [
+          {
+            "node": "translate_to_turkish",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "translate_to_french",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "translate_to_german",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "translate_to_russian",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "translate_to_turkish": {
+      "main": [
+        [
+          {
+            "node": "normalize_translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "translate_to_french": {
+      "main": [
+        [
+          {
+            "node": "normalize_translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "translate_to_german": {
+      "main": [
+        [
+          {
+            "node": "normalize_translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "translate_to_russian": {
+      "main": [
+        [
+          {
+            "node": "normalize_translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "normalize_translations": {
+      "main": [
+        [
+          {
+            "node": "create_post_turkish",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "create_post_french",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "create_post_german",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "create_post_russian",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_post_turkish": {
+      "main": [
+        [
+          {
+            "node": "assign_language_turkish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_post_french": {
+      "main": [
+        [
+          {
+            "node": "assign_language_french",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_post_german": {
+      "main": [
+        [
+          {
+            "node": "assign_language_german",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_post_russian": {
+      "main": [
+        [
+          {
+            "node": "assign_language_russian",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "assign_language_turkish": {
+      "main": [
+        [
+          {
+            "node": "notify_admin_success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "assign_language_french": {
+      "main": [
+        [
+          {
+            "node": "notify_admin_success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "assign_language_german": {
+      "main": [
+        [
+          {
+            "node": "notify_admin_success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "assign_language_russian": {
+      "main": [
+        [
+          {
+            "node": "notify_admin_success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}
